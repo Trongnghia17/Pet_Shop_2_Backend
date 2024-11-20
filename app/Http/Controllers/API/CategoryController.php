@@ -62,7 +62,10 @@ class CategoryController extends Controller
                 'meta_title' => 'required|max:191',
                 'slug' => 'required|max:191',
                 'name' => 'required|max:191',
-                'image' => 'required|image|mimes:jpeg,png,jpg|max:15360',
+                'description' => 'required|max:500',
+                'status' => 'required|boolean',
+                'image' => 'image|mimes:jpeg,png,jpg|max:15360',
+
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
