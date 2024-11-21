@@ -59,7 +59,6 @@ class CategoryController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'meta_title' => 'required|max:191',
                 'slug' => 'required|max:191',
                 'name' => 'required|max:191',
                 'description' => 'required|max:500',
@@ -78,9 +77,6 @@ class CategoryController extends Controller
             ]);
         } else {
             $category = new Category;
-            $category->meta_title = $request->input('meta_title');
-            $category->meta_keyword = $request->input('meta_keyword');
-            $category->meta_descrip = $request->input('meta_descrip');
             $category->slug = $request->input('slug');
             $category->name = $request->input('name');
             $category->description = $request->input('description');
@@ -122,9 +118,6 @@ class CategoryController extends Controller
         } else {
             $category = Category::find($id);
             if ($category) {
-                $category->meta_title = $request->input('meta_title');
-                $category->meta_keyword = $request->input('meta_keyword');
-                $category->meta_descrip = $request->input('meta_descrip');
                 $category->slug = $request->input('slug');
                 $category->name = $request->input('name');
                 $category->description = $request->input('description');
@@ -157,6 +150,10 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category) {
+            $path = $category->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
             $category->delete();
             return response()->json([
                 'status' => 200,
