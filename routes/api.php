@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,14 @@ Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
         Route::put('update-category/{id}', 'update');
         Route::delete('delete-category/{id}', 'destroy');
         Route::get('all-category', 'allcategory');
+    });
+    // Product
+    Route::controller(ProductController::class)->group(function () {
+        Route::post('store-product', 'store');
+        Route::get('view-product', 'index');
+        Route::get('edit-product/{id}', 'edit');
+        Route::put('update-product/{id}', 'update');
+        Route::delete('delete-product/{id}', 'destroy');
     });
 });
 
