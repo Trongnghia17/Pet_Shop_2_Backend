@@ -26,8 +26,15 @@ class AuthController extends Controller
             ]
         );
         if ($validator->fails()) {
+            $errors = $validator->messages();
+            if ($errors->has('email')) {
+                return response()->json([
+                    'status' => 409,
+                    'message' => 'Email đã tồn tại.',
+                ]);
+            }
             return response()->json([
-                'validator_errors' => $validator->messages(),
+                'validator_errors' => $errors,
             ]);
         } else {
             $user = User::create([
