@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\AlbumController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 // dang nhap
 Route::post('login', [AuthController::class, 'login']);
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('get-all-category', 'getAllCategory');
+});
+// Album
+Route::controller(AlbumController::class)->group(function () {
+    Route::get('getAlbumPet', 'index');
+    Route::post('store-albumPet', 'store');
+});
 
 Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
 
