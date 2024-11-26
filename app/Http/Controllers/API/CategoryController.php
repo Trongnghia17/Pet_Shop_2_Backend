@@ -59,15 +59,15 @@ class CategoryController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'slug' => 'required|max:191',
+                'slug' => 'required|max:191|unique:categories,slug',
                 'name' => 'required|max:191',
                 'description' => 'required|max:500',
                 'status' => 'required|boolean',
                 'image' => 'image|mimes:jpeg,png,jpg|max:15360',
-
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
+                'unique'  => 'Slug đã tồn tại!',
             ]
         );
         if ($validator->fails()) {
@@ -102,12 +102,13 @@ class CategoryController extends Controller
             $request->all(),
             [
                 'meta_title' => 'required|max:191',
-                'slug' => 'required|max:191',
+                'slug' => 'required|max:191|unique:categories,slug',
                 'name' => 'required|max:191',
 
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
+                'unique'  => 'Slug đã tồn tại!',
             ]
         );
         if ($validator->fails()) {

@@ -26,7 +26,7 @@ class ProductController extends Controller
             $request->all(),
             [
                 'category_id' => 'required|max:191',
-                'slug' => 'required|max:191',
+                'slug' => 'required|max:191|unique:categories,slug',
                 'name' => 'required|max:191',
                 'brand' => 'required|max:20',
                 'selling_price' => 'required|max:20',
@@ -36,6 +36,7 @@ class ProductController extends Controller
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
+                'unique'  => 'Slug đã tồn tại!',
             ]
         );
         if ($validator->fails()) {
@@ -94,7 +95,7 @@ class ProductController extends Controller
             $request->all(),
             [
                 'category_id' => 'required|max:191',
-                'slug' => 'required|max:191',
+                'slug' => 'required|max:191|unique:categories,slug',
                 'name' => 'required|max:191',
                 'brand' => 'required|max:20',
                 'selling_price' => 'required|max:20',
@@ -103,6 +104,7 @@ class ProductController extends Controller
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
+                'unique'  => 'Slug đã tồn tại!',
             ]
         );
         if ($validator->fails()) {

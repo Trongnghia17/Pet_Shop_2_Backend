@@ -25,7 +25,7 @@ return new class extends Migration // Tạo một class ẩn danh kế thừa t�
             ->on('categories')         // Chỉ định bảng 'categories' là bảng tham chiếu.
             ->onDelete('cascade');     // Nếu bản ghi trong 'categories' bị xóa, các bản ghi liên quan trong 'products' cũng bị xóa.
 
-            $table->string('slug');
+            $table->string('slug')->unique();
             // Tạo cột 'slug' kiểu chuỗi, dùng để lưu URL thân thiện của sản phẩm.
 
             $table->string('name');
