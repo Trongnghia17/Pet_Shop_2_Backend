@@ -53,6 +53,10 @@ return new class extends Migration // Tạo một class ẩn danh kế thừa t�
             // Tạo cột 'featured' kiểu số nguyên nhỏ, xác định sản phẩm có được đánh dấu nổi bật hay không.
             // Mặc định là '0' (không nổi bật), có thể để trống.
 
+            $table->tinyInteger('popular')->default('0')->nullable();
+            // Tạo cột 'popular' kiểu số nguyên nhỏ, xác định sản phẩm có phổ biến không.
+            // Mặc định là '0' (không phổ biến), có thể để trống.
+
             $table->tinyInteger('status')->default('0');
             // Tạo cột 'status' kiểu số nguyên nhỏ, lưu trạng thái sản phẩm.
             // Mặc định là '0' (ẩn).
