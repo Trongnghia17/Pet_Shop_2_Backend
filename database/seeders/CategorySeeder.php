@@ -20,14 +20,14 @@ class CategorySeeder extends Seeder
                     'name' => 'Chó',
                     'description' => 'Chó Việt Nam',
                     'image' => 'uploads/category/1683206764.jpg',
-                    'status' => 0,
+                    'status' => 1,
                 ],
                 [
                     'slug' => 'meo',
                     'name' => 'Mèo',
                     'description' => 'Mèo Việt Nam',
                     'image' => 'uploads/category/1683206734.jpg',
-                    'status' => 0,
+                    'status' => 1,
                 ],
             ]
         );

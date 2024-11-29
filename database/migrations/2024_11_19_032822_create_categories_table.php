@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('image')->nullable()->comment('Ảnh loại thú cưng');
-            $table->tinyInteger('status')->default('0');
+            $table->tinyInteger('status')->default('1');
             $table->timestamps();
         });
     }

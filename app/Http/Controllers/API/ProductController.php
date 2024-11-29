@@ -157,10 +157,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if ($product) {
-            $path = $product->image;
-            if (File::exists($path)) {
-                File::delete($path);
-            }
+//            $path = $product->image;
+//            if (File::exists($path)) {
+//                File::delete($path);
+//            }
             $product->delete();
             return response()->json([
                 'status' => 200,
