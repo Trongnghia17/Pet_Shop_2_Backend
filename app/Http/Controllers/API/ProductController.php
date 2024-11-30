@@ -7,15 +7,22 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+
     // xem thú cưng
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $query = Product::query();
+        if ($request->has('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        $products = $query->get();
         return response()->json([
-            'status' => 200,
+            'status' => Response::HTTP_OK,
             'products' => $products
         ]);
     }

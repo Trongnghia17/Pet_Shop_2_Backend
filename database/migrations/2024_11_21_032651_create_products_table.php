@@ -37,13 +37,13 @@ return new class extends Migration // Tạo một class ẩn danh kế thừa t�
             $table->string('brand');
             // Tạo cột 'brand' kiểu chuỗi, dùng để lưu thương hiệu sản phẩm.
 
-            $table->decimal('selling_price', 15, 2);
+            $table->decimal('selling_price', 15, 0);
             // Tạo cột 'selling_price' kiểu chuỗi, dùng để lưu giá bán của sản phẩm.
 
-            $table->decimal('original_price', 15, 2);
+            $table->decimal('original_price', 15, 0);
             // Tạo cột 'original_price' kiểu chuỗi, dùng để lưu giá gốc của sản phẩm.
 
-            $table->decimal('quantity', 15, 2);
+            $table->decimal('quantity', 15, 0);
             // Tạo cột 'quantity' kiểu chuỗi, dùng để lưu số lượng sản phẩm.
 
             $table->string('image')->nullable();
