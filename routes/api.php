@@ -25,6 +25,7 @@ Route::controller(AlbumController::class)->group(function () {
     Route::get('getAlbumPet', 'index');
     Route::post('store-albumPet', 'store');
 });
+
 // subscribers
 Route::controller(SubscriberController::class)->group(function () {
     Route::post('subscribers', 'store');
