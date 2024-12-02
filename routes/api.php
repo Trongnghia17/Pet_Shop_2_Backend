@@ -8,6 +8,7 @@ use App\Http\Controllers\API\SubscriberController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,13 @@ Route::controller(AlbumController::class)->group(function () {
 // subscribers
 Route::controller(SubscriberController::class)->group(function () {
     Route::post('subscribers', 'store');
+});
+// Cart
+Route::controller(CartController::class)->group(function () {
+    Route::post('add-to-cart', 'addToCart');
+    Route::get('cart', 'viewCart');
+    Route::put('cart-updateQuantity/{cart_id}/{scope}', 'updateQuantity');
+    Route::delete('delete-cartItem/{cart_id}', 'deleteCartItem');
 });
 
 Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
