@@ -9,6 +9,7 @@ use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\CommentController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\CartController;
+use App\Http\Controllers\API\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,11 @@ Route::controller(CartController::class)->group(function () {
     Route::get('cart', 'viewCart');
     Route::put('cart-updateQuantity/{cart_id}/{scope}', 'updateQuantity');
     Route::delete('delete-cartItem/{cart_id}', 'deleteCartItem');
+});
+// checkout
+Route::controller(CheckoutController::class)->group(function () {
+    Route::post('place-order', 'placeOrder');
+    Route::post('validate-order', 'validateOrder');
 });
 
 Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
