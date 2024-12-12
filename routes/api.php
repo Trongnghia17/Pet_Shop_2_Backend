@@ -12,7 +12,7 @@ use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\API\FrontendController;
 //dang ky
 Route::post('register', [AuthController::class, 'register']);
 // dang nhap
@@ -42,6 +42,13 @@ Route::controller(CartController::class)->group(function () {
 Route::controller(CheckoutController::class)->group(function () {
     Route::post('place-order', 'placeOrder');
     Route::post('validate-order', 'validateOrder');
+});
+// Frontend
+Route::controller(FrontendController::class)->group(function () {
+    Route::get('viewHomePage', 'index');
+    Route::get('getCategory', 'category');
+    Route::get('fetchproducts/{slug}', 'product');
+    Route::get('viewproductdetail/{category_slug}/{product_slug}', 'viewproduct');
 });
 
 Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
