@@ -66,22 +66,26 @@ class CartController extends Controller
         }
     }
 
-    public function updateQuantity($cart_id, $scope)
+    public function updateQuantity(Request $request, $cart_id)
     {
         if (auth('sanctum')->check()) {
             $user_id = auth('sanctum')->user()->id;
             $cartItem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
-            if($cartItem) {
-                if ($scope == "inc") { // increase
-                    $cartItem->product_quantity += 1;
-                } else if ($scope == "dec") {
-                    $cartItem->product_quantity -= 1;
+            if ($cartItem) {
+                $quantity = $request->quantity ;
+                if (is_numeric($quantity )) {
+                    $cartItem->product_quantity = $quantity;
+                    $cartItem->update();
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'Đã cập nhật số lượng.',
+                    ]);
+                } else {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Giá trị không hợp lệ!',
+                    ]);
                 }
-                $cartItem->update();
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Đã cập nhật số lượng.',
-                ]);
             } else {
                 return response()->json([
                     'status' => 404,

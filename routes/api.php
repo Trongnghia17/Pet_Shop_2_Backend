@@ -35,7 +35,7 @@ Route::controller(SubscriberController::class)->group(function () {
 Route::controller(CartController::class)->group(function () {
     Route::post('add-to-cart', 'addToCart');
     Route::get('cart', 'viewCart');
-    Route::put('cart-updateQuantity/{cart_id}/{scope}', 'updateQuantity');
+    Route::put('cart-updateQuantity/{cart_id}', 'updateQuantity');
     Route::delete('delete-cartItem/{cart_id}', 'deleteCartItem');
 });
 // checkout
