@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('product_quantity');
+            $table->boolean('is_selected')->default(true);
             $table->foreign('product_id')
                 ->references('id')
                 ->on('products')

@@ -72,9 +72,13 @@ class CartController extends Controller
             $user_id = auth('sanctum')->user()->id;
             $cartItem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
             if ($cartItem) {
-                $quantity = $request->quantity ;
+                $quantity = $request->quantity;
+                $is_selected = $request->is_selected;
                 if (is_numeric($quantity )) {
                     $cartItem->product_quantity = $quantity;
+                    if (isset($is_selected)) {
+                        $cartItem->is_selected = $is_selected;
+                    }
                     $cartItem->update();
                     return response()->json([
                         'status' => 200,

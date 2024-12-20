@@ -12,6 +12,7 @@ class Cart extends Model
         'user_id',
         'product_id',
         'product_quantity',
+        'is_selected',
     ];
     protected $with = ['product'];
     public function product()
