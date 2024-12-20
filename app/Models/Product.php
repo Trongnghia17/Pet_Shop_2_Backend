@@ -20,7 +20,7 @@ class Product extends Model
         'brand',
         'selling_price',
         'original_price',
-        'qty',
+        'quantity',
         'image',
         'featured',
         'popular',

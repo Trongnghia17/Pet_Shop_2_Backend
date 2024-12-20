@@ -11,14 +11,13 @@ class Order extends Model
     use HasFactory;
     protected $table = 'orders';
     protected $fillable = [
+        'user_id',
+        'amount',
         'address',
-        'nameCard',
-        'cardNumber',
-        'cvc',
-        'month',
-        'year',
+        'payment_mode',
+        'tracking_no',
     ];
-
+    protected $with = ['orderItems'];
     public function orderItems()
     {
         return $this->hasMany(OrderItems::class, 'order_id', 'id');

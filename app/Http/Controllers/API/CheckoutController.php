@@ -63,11 +63,13 @@ class CheckoutController extends Controller
                 foreach ($cart as $item) {
                     $orderitems[] = [
                         'product_id' => $item->product_id,
-                        'qty' => $item->product_qty,
+                        'quantity' => $item->product_quantity,
                         'price' => $item->product->selling_price,
+                        'name' => $item->product->name,
+                        'image' => $item->product->image,
                     ];
                     $item->product->update([
-                        'qty' => $item->product->qty - $item->product_qty
+                        'quantity' => $item->product->quantity - $item->product_quantity
                     ]);
                 }
                 $order->orderitems()->createMany($orderitems);
