@@ -56,8 +56,7 @@ return new class extends Migration // Tạo một class ẩn danh kế thừa t�
             $table->tinyInteger('popular')->default('0')->nullable();
             // Tạo cột 'popular' kiểu số nguyên nhỏ, xác định sản phẩm có phổ biến không.
             // Mặc định là '0' (không phổ biến), có thể để trống.
-
-            $table->tinyInteger('status')->default('0');
+            $table->tinyInteger('status')->default('1');
             // Tạo cột 'status' kiểu số nguyên nhỏ, lưu trạng thái sản phẩm.
             // Mặc định là '0' (ẩn).
 

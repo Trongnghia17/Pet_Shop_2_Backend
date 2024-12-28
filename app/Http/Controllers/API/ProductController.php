@@ -71,7 +71,7 @@ class ProductController extends Controller
             }
             $product->featured = $request->input('featured') == true ? '1' : '0';
             $product->popular = $request->input('popular') == true ? '1' : '0';
-            $product->status = $request->input('status') == true ? '1' : '0';
+            $product->status = $request->input('status');
             $product->save();
             return response()->json([
                 'status' => 200,
@@ -145,7 +145,7 @@ class ProductController extends Controller
                 }
                 $product->featured = $request->input('featured', '0');
                 $product->popular = $request->input('popular', '0');
-                $product->status = $request->input('status', '0');
+                $product->status = $request->input('status');
                 $product->update();
                 return response()->json([
                     'status' => 200,
