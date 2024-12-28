@@ -21,7 +21,7 @@ class DashboardController extends Controller
         return response()->json([
             'status' => 200,
             'products' => $products,
-            'category' => $category,
+            'categories' => $category,
             'orders' => $orders,
             'comments' => $comments,
         ]);

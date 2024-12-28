@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '20',
                     'image' => 'uploads/product/1683206936.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 6,
                 ],
                 [
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '15',
                     'image' => 'uploads/product/1683206996.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 0,
                 ],
                 [
@@ -54,7 +54,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '8',
                     'image' => 'uploads/product/1683207088.jpg',
                     'featured' => 0,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 14,
                 ],
                 [
@@ -68,7 +68,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '10',
                     'image' => 'uploads/product/1683207152.jpg',
                     'featured' => 0,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 4,
                 ],
                 [
@@ -82,7 +82,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '12',
                     'image' => 'uploads/product/1683207204.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 0,
                 ],
                 [
@@ -96,7 +96,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '1',
                     'image' => 'uploads/product/1683207822.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 4,
                 ],
                 [
@@ -110,7 +110,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '90',
                     'image' => 'uploads/product/1683206936.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 6,
                 ],
                 [
@@ -124,7 +124,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '15',
                     'image' => 'uploads/product/1683206996.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 0,
                 ],
                 [
@@ -138,7 +138,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '8',
                     'image' => 'uploads/product/1683207088.jpg',
                     'featured' => 0,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 14,
                 ],
                 [
@@ -152,7 +152,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '10',
                     'image' => 'uploads/product/1683207152.jpg',
                     'featured' => 0,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 4,
                 ],
                 [
@@ -166,7 +166,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '12',
                     'image' => 'uploads/product/1683207204.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 0,
                 ],
                 [
@@ -180,7 +180,7 @@ class ProductSeeder extends Seeder
                     'quantity' => '1',
                     'image' => 'uploads/product/1683207822.jpg',
                     'featured' => 1,
-                    'status' => 0,
+                    'status' => 1,
                     'count' => 4,
                 ],
             ]
