@@ -20,19 +20,18 @@ class FrontendController extends Controller
         $categories = Category::with('products')->get();
 
         // lấy tất cả thú cưng
-        $productsQuery = Product::query();
+        $productsQuery = Product::where('status', '1');
         if ($request->has('name')) {
             $productsQuery->where('name', 'like', '%' . $request->input('name') . '%');
         }
 
-
         $products = $productsQuery->get();
 
         // sản phẩm phổ biến
-        $popularProducts = Product::orderByDesc('count')->take(4)->get();
+        $popularProducts = Product::where('status', '1')->orderByDesc('count')->take(4)->get();
 
         // Sản phẩm nổi bật
-        $featuredProducts = Product::where('featured', '1')->take(4)->get();
+        $featuredProducts = Product::where('status', '1')->where('featured', '1')->take(4)->get();
 
         return response()->json([
             'status' => 200,
@@ -55,7 +54,7 @@ class FrontendController extends Controller
         $category = Category::where('slug', $slug)->where('status', '1')->first();
         if ($category) {
             // Tìm pet thông qua khóa ngoại liên kết khóa chính
-            $product = Product::where('category_id', $category->id)->where('status', '0')->paginate(3);
+            $product = Product::where('category_id', $category->id)->where('status', '1')->paginate(3);
             // $product = Product::where('category_id', $category->id)->where('status', '0')->get();
             if ($product) {
                 return response()->json([
@@ -88,7 +87,7 @@ class FrontendController extends Controller
     {
         $category = Category::where('slug', $category_slug)->where('status', '1')->first();
         if ($category) {
-            $product = Product::where('category_id', $category->id)->where('slug', $product_slug)->where('status', '0')->first();
+            $product = Product::where('category_id', $category->id)->where('slug', $product_slug)->where('status', '1')->first();
             if ($product) {
                 $product->increment('count', 1); // count+1 nếu tải trang
                 $comments = $product->comments;

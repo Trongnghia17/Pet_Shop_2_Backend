@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $products = Product::where('status', '0')->count();
+        $products = Product::where('status', '1')->count();
         $category = Category::where('status', '1')->count();
         $orders = Order::count();
         $comments = Comment::count();

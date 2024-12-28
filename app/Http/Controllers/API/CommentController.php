@@ -37,7 +37,7 @@ class CommentController extends Controller
             ]);
         }
         if (auth('sanctum')->check()) {
-            $product = Product::where('slug', $slug)->where('status', '0')->first();
+            $product = Product::where('slug', $slug)->where('status', '1')->first();
             $user_id = auth('sanctum')->user()->id;
             if ($product) {
                 Comment::create([
