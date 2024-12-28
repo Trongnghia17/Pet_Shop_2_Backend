@@ -14,14 +14,23 @@ use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        //lấy tát cả loại thú cưng
-        $category = Category::all();
+        // lấy tất cả loại thú cưng
+        $categories = Category::with('products')->get();
+
         // lấy tất cả thú cưng
-        $products = Product::all();
+        $productsQuery = Product::query();
+        if ($request->has('name')) {
+            $productsQuery->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+
+        $products = $productsQuery->get();
+
         // sản phẩm phổ biến
         $popularProducts = Product::orderByDesc('count')->take(4)->get();
+
         // Sản phẩm nổi bật
         $featuredProducts = Product::where('featured', '1')->take(4)->get();
 
@@ -29,7 +38,7 @@ class FrontendController extends Controller
             'status' => 200,
             'products' => $products,
             'popularProducts' => $popularProducts,
-            'category' => $category,
+            'categories' => $categories,
             'featuredProducts' => $featuredProducts,
         ]);
     }

@@ -29,6 +29,27 @@ class CategorySeeder extends Seeder
                     'image' => 'uploads/category/1683206734.jpg',
                     'status' => 1,
                 ],
+                [
+                    'slug' => 'hamster',
+                    'name' => 'Hamster',
+                    'description' => 'Hamster Việt Nam',
+                    'image' => 'uploads/category/1683206794.jpg',
+                    'status' => 1,
+                ],
+                [
+                    'slug' => 'chuot',
+                    'name' => 'Chuột',
+                    'description' => 'Chuột Việt Nam',
+                    'image' => 'uploads/category/1683206824.jpg',
+                    'status' => 1,
+                ],
+                [
+                    'slug' => 'thu-cung-khac',
+                    'name' => 'Thú cưng khác',
+                    'description' => 'Thú cưng khác',
+                    'image' => 'uploads/category/1683206854.jpg',
+                    'status' => 1,
+                ]
             ]
         );
     }

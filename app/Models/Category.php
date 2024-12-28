@@ -1,5 +1,7 @@
 <?php
 
+// app/Models/Category.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +11,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
-    //Nhưng mà với mỗi hình thì nên có thêm 2 trường: tên người đăng và 1 dòng cảm nhận (status)
+
     protected $fillable = [
         'slug',
         'name',
@@ -17,4 +19,9 @@ class Category extends Model
         'image',
         'status',
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
+    }
 }
