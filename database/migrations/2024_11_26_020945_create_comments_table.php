@@ -19,7 +19,7 @@ return new class extends Migration
                 ->on('products')
                 ->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->text('content');
+            $table->text('comment');
             $table->timestamps();
         });
     }

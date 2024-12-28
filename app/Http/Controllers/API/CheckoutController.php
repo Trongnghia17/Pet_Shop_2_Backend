@@ -58,7 +58,7 @@ class CheckoutController extends Controller
                 $order->tracking_no = 'petshop' . rand(1111, 9999);
                 $order->save();
 
-                $cart = Cart::where('user_id', $user_id)->get();
+                $cart = Cart::where('user_id', $user_id)->where('is_selected', true)->get();
                 $orderitems = [];
                 foreach ($cart as $item) {
                     $orderitems[] = [

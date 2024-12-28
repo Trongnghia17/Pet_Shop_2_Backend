@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             AlbumSeeder::class,
             ProductSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }

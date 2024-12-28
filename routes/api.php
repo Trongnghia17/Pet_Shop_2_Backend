@@ -13,6 +13,7 @@ use App\Http\Controllers\API\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\FrontendController;
+
 //dang ky
 Route::post('register', [AuthController::class, 'register']);
 // dang nhap
@@ -50,7 +51,12 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('fetchproducts/{slug}', 'product');
     Route::get('viewproductdetail/{category_slug}/{product_slug}', 'viewproduct');
 });
-
+// Comment
+Route::controller(CommentController::class)->group(function () {
+    Route::post('comments/{slug}', 'store'); // Add comment
+    Route::get('comments', 'index'); // View all comments
+    Route::delete('comments/{id}', 'destroy'); // Delete comment
+});
 Route::middleware('auth:sanctum', 'isAPIAdmin')->group(function () {
     Route::controller(DashboardController::class)->group(function () {
         Route::get('view-dashboard', 'index');
@@ -96,6 +102,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
- Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-     return $request->user();
- });
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});

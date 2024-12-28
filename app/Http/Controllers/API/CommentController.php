@@ -24,11 +24,11 @@ class CommentController extends Controller
         $validate = Validator::make(
             $request->all(),
             [
-                'content' => 'required|string',
+                'comment' => 'required|string',
             ],
             [
                 'required' => 'Bạn phải điền bình luận',
-        ]
+            ]
         );
         if ($validate->fails()) {
             return response()->json([
@@ -41,7 +41,7 @@ class CommentController extends Controller
             $user_id = auth('sanctum')->user()->id;
             if ($product) {
                 Comment::create([
-                    'product_id' => $product->id, // slug của product => miu
+                    'product_id' => $product->id,
                     'user_id' => $user_id,
                     'comment' => $request->comment,
                     'slug' => $request->slug,
@@ -62,7 +62,6 @@ class CommentController extends Controller
                 'message' => 'Bạn phải đăng nhập!',
             ]);
         }
-
     }
 
     public function destroy($id)
