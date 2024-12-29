@@ -28,10 +28,10 @@ class FrontendController extends Controller
         $products = $productsQuery->get();
 
         // sản phẩm phổ biến
-        $popularProducts = Product::where('status', '1')->orderByDesc('count')->take(4)->get();
+        $popularProducts = Product::where('status', '1')->orderByDesc('count')->take(10)->get();
 
         // Sản phẩm nổi bật
-        $featuredProducts = Product::where('status', '1')->where('featured', '1')->take(4)->get();
+        $featuredProducts = Product::where('status', '1')->where('featured', '1')->take(10)->get();
 
         return response()->json([
             'status' => 200,
