@@ -17,20 +17,22 @@ class CheckoutController extends Controller
         if (auth('sanctum')->check()) {
             $rules = [
                 'address' => 'required|max:255',
+                'payment_mode' => 'required|in:cod,stripe',
+                'amount' => 'required|numeric|min:1|max:99999999', // Add max validation
             ];
 
-            if ($request->payment_mode !== 'cod') {
+            if ($request->payment_mode === 'stripe') {
                 $rules = array_merge($rules, [
-                    'nameCard' => 'required|max:255',
-                    'cardNumber' => 'required|max:255',
-                    'cvc' => 'required|max:255',
-                    'month' => 'required|max:255',
-                    'year' => 'required|max:255',
+                    'stripeToken' => 'required',
                 ]);
             }
 
             $validator = Validator::make($request->all(), $rules, [
                 'required' => 'Bạn phải điền :attribute',
+                'in' => 'Hình thức thanh toán không hợp lệ',
+                'numeric' => 'Tổng tiền phải là số',
+                'min' => 'Tổng tiền phải lớn hơn 0',
+                'max' => 'Tổng tiền không được vượt quá 99,999,999 VND', // Add max validation message
             ]);
 
             if ($validator->fails()) {
@@ -40,13 +42,20 @@ class CheckoutController extends Controller
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
             } else {
                 if ($request->payment_mode === 'stripe') {
-                    Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-                    Stripe\Charge::create([
-                        "amount" => $request->amount,
-                        "currency" => "VND",
-                        "source" => $request->stripeToken,
-                        "description" => "Thanh toán thành công!"
-                    ]);
+                    try {
+                        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+                        Stripe\Charge::create([
+                            "amount" => $request->amount , // Stripe expects the amount in cents
+                            "currency" => "VND",
+                            "source" => $request->stripeToken,
+                            "description" => "Thanh toán thành công!"
+                        ]);
+                    } catch (\Exception $e) {
+                        return response()->json([
+                            'status' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                            'message' => 'Đã xảy ra lỗi khi thanh toán bằng Stripe: ' . $e->getMessage(),
+                        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+                    }
                 }
 
                 $user_id = auth('sanctum')->user()->id;
