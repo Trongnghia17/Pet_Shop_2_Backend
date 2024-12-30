@@ -20,25 +20,25 @@ class UserSeeder extends Seeder
                 [
                     'name' => 'Admin',
                     'email' => 'admin@gmail.com',
-                    'password' => Hash::make('12345678'),
+                    'password' => Hash::make('Nhom3***'),
                     'role_as' => 1,
                 ],
                 [
                     'name' => 'Trần Trọng Nghĩa',
                     'email' => 'Nghia@gmail.com',
-                    'password' => Hash::make('12345678'),
+                    'password' => Hash::make('Nhom3***'),
                     'role_as' => 0,
                 ],
                 [
                     'name' => 'Nguyễn Hồng Phúc',
                     'email' => 'Phuc@gmail.com',
-                    'password' => Hash::make('12345678'),
+                    'password' => Hash::make('Nhom3***'),
                     'role_as' => 0,
                 ],
                 [
                     'name' => 'Trần Nhật Nam',
                     'email' => 'Nam@gmail.com',
-                    'password' => Hash::make('12345678'),
+                    'password' => Hash::make('Nhom3***'),
                     'role_as' => 0,
                 ],
             ]
