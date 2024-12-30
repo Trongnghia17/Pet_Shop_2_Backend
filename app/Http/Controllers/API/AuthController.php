@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-
+use PragmaRX\Google2FA\Google2FA;
 
 class AuthController extends Controller
 {
@@ -19,37 +19,41 @@ class AuthController extends Controller
             [
                 'name' => 'required|max:191',
                 'email' => 'required|email|max:191|unique:users,email',
-                'password' => 'required|min:8',
-            ],
-            [
-                'required'  => 'Bạn phải điền :attribute',
+                'password' => [
+                    'required',
+                    'min:6',
+                    'regex:/^(?=.*[A-Z])(?=.*\W).+$/',
+                ],
+                'google2fa_code' => 'required|digits:6',
             ]
         );
+
         if ($validator->fails()) {
-            $errors = $validator->messages();
-            if ($errors->has('email')) {
-                return response()->json([
-                    'status' => 409,
-                    'message' => 'Email đã tồn tại.',
-                ]);
-            }
-            return response()->json([
-                'validator_errors' => $errors,
-            ]);
-        } else {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-            $token = $user->createToken($user->email . '_Token')->plainTextToken;
-            return response()->json([
-                'status' => 200,
-                'username' => $user->name,
-                'token' => $token,
-                'message' => 'Đăng ký thành công.',
-            ]);
+            return response()->json(['errors' => $validator->messages()], 400);
         }
+
+        $google2fa = new Google2FA();
+        $secret = $request->input('google2fa_secret');
+
+        // Verify the 2FA code
+        $valid = $google2fa->verifyKey($secret, $request->google2fa_code);
+
+        if (!$valid) {
+            return response()->json(['message' => 'Mã Google Authenticator không chính xác!'], 401);
+        }
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'google2fa_secret' => $secret,
+        ]);
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Đăng ký thành công.',
+            'username' => $user->name,
+        ]);
     }
     public function login(Request $request)
     {
@@ -57,7 +61,11 @@ class AuthController extends Controller
             $request->all(),
             [
                 'email' => 'required|max:191',
-                'password' => 'required',
+                'password' => [
+                    'required',
+                    'min:6',
+                    'regex:/^(?=.*[A-Z])(?=.*\W).+$/',
+                ],
             ],
             [
                 'required'  => 'Bạn phải điền :attribute',
@@ -98,6 +106,31 @@ class AuthController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Đã đăng xuất.',
+        ]);
+    }
+    public function getQrCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:191|unique:users,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->messages()], 400);
+        }
+
+        $google2fa = new Google2FA();
+        $secret = $google2fa->generateSecretKey();
+
+        $QR_Image = $google2fa->getQRCodeUrl(
+            config('app.name'), // Application name
+            $request->email,
+            $secret
+        );
+
+        return response()->json([
+            'status' => 200,
+            'qr_image' => $QR_Image, // URL mã QR để hiển thị trên frontend
+            'google2fa_secret' => $secret,
         ]);
     }
 }

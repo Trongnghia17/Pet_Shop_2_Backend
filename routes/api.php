@@ -18,6 +18,7 @@ use App\Http\Controllers\API\FrontendController;
 Route::post('register', [AuthController::class, 'register']);
 // dang nhap
 Route::post('login', [AuthController::class, 'login']);
+Route::post('get-qr-code', [AuthController::class, 'getQrCode']);
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('get-all-category', 'getAllCategory');
