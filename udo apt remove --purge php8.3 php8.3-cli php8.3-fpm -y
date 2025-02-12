@@ -1,0 +1,17 @@
+[0;1;32m●[0m php8.2-fpm.service - The PHP 8.2 FastCGI Process Manager
+     Loaded: loaded (]8;;file://admin/usr/lib/systemd/system/php8.2-fpm.service/usr/lib/systemd/system/php8.2-fpm.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: [0;1;32mactive (running)[0m since Wed 2025-02-12 17:16:11 UTC; 7s ago
+       Docs: ]8;;man:php-fpm8.2(8)man:php-fpm8.2(8)]8;;
+    Process: 94377 ExecStartPost=/usr/lib/php/php-fpm-socket-helper install /run/php/php-fpm.sock /etc/php/8.2/fpm/pool.d/www.conf 82 (code=exited, status=0/SUCCESS)
+   Main PID: 94373 (php-fpm8.2)
+     Status: "[0;1;36mReady to handle connections[0m"
+      Tasks: 3 (limit: 4556)
+     Memory: 9.5M (peak: 10.7M)
+        CPU: 102ms
+     CGroup: /system.slice/php8.2-fpm.service
+             ├─[0;38;5;245m94373 "php-fpm: master process (/etc/php/8.2/fpm/php-fpm.conf)"[0m
+             ├─[0;38;5;245m94375 "php-fpm: pool www"[0m
+             └─[0;38;5;245m94376 "php-fpm: pool www"[0m
+
+Feb 12 17:16:11 admin systemd[1]: Starting php8.2-fpm.service - The PHP 8.2 FastCGI Process Manager...
+Feb 12 17:16:11 admin systemd[1]: Started php8.2-fpm.service - The PHP 8.2 FastCGI Process Manager.
